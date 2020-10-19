@@ -64,6 +64,11 @@ export class createConfeitarias1603060860327 implements MigrationInterface {
                     name: 'estado',
                     type: 'varchar'
                 },
+                {
+                    name: 'logo_path',
+                    type: 'varchar',
+                    isNullable: true,
+                },
             ],
         }))
     }

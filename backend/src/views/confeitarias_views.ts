@@ -1,5 +1,4 @@
 import Confeitaria from '../models/Confeitaria';
-import logoView from './logo_view';
 
 export default {
     render(confeitaria: Confeitaria) {
@@ -17,7 +16,7 @@ export default {
             bairro: confeitaria.bairro,
             cidade: confeitaria.cidade,
             estado: confeitaria.estado,
-            logo: logoView.render(confeitaria.logo),
+            url: `http://localhost:3333/uploads/${confeitaria.logo_path}`,
         };
     },
 

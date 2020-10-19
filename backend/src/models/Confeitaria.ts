@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToOne } from 'typeorm';
-import Logo from './Logo';
 
 @Entity('confeitarias')
 export default class Confeitaria {
@@ -42,9 +41,6 @@ export default class Confeitaria {
     @Column()
     estado: string;
 
-    @OneToOne(() => Logo, logo => logo.confeitaria, {
-        cascade: ['insert', 'update']
-    })
-    @JoinColumn({ name: 'confeitaria_id' })
-    logo: Logo;
+    @Column()
+    logo_path: string;
 }
