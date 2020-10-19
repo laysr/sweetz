@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import Confeitaria from '../models/Confeitaria';
 
 export default {
+    // Lista todas as confeitarias cadastradas
     async index(request: Request, response: Response) {
         const confeitariaRepository = getRepository(Confeitaria);
 
@@ -14,6 +15,7 @@ export default {
         return response.json(confeitariaView.renderMany(confeitarias));
     },
 
+    // Mostra uma confeitaria específica e suas informações
     async show(request: Request, response: Response) {
         const { id } = request.params;
 
@@ -24,6 +26,7 @@ export default {
         return response.json(confeitariaView.render(confeitaria));
     },
 
+    // Cria uma nova confeitaria no banco de dados
     async create(request: Request, response: Response) {
         const {
             nome,
@@ -89,17 +92,14 @@ export default {
         return response.status(201).json(confeitaria);
     },
 
-    async delete(request: Request, response: Response) {
-        const { id } = request.body;
+    // Atualiza os dados de uma confeitaria
+    async update(request: Request, response: Response){
+        interface LooseObject {
+            [key: string]: any
+        }
 
-        const confeitariaRepository = getRepository(Confeitaria);
-
-        await confeitariaRepository.delete(id);
-
-        return response.json({ message: 'Deletado com sucesso! '});
-    },
-
-    async update(request: Request, response: Response) {
+        const { id } = request.params;
+        
         const {
             nome,
             cpf,
@@ -115,33 +115,14 @@ export default {
             estado,
         } = request.body;
 
-        const { id } = request.params;
-
-        const confeitariaRepository = getRepository(Confeitaria);
-
         const requestLogo = request.file as Express.Multer.File;
-        let logo = { path: '' };
-        if(requestLogo) {
-            logo = { path: requestLogo.filename }
-        }
+        
+        const confeitariaRepository = getRepository(Confeitaria);
+        
+        const confeitaria = await confeitariaRepository.findOneOrFail(id);
 
-        const data = {
-            nome,
-            cpf,
-            nome_negocio,
-            cnpj,
-            descricao,
-            telefone,
-            rua,
-            numero,
-            complemento,
-            bairro,
-            cidade,
-            estado,
-            logo
-        }
-
-        const dataValidation = {
+        // Validação dos dados
+        const dataValidation: LooseObject = {
             id,
             nome,
             cpf,
@@ -155,8 +136,9 @@ export default {
             bairro,
             cidade,
             estado,
-            logo
         }
+
+        if(requestLogo) dataValidation.logo_path = requestLogo.filename;
 
         const schema = Yup.object().shape({
             id: Yup.number().required(),
@@ -172,21 +154,40 @@ export default {
             bairro: Yup.string(),
             cidade: Yup.string(),
             estado: Yup.string(),
-            logo: Yup.object().shape({
-                path: Yup.string()
-            })
+            logo_path: Yup.string(),
         });
 
         await schema.validate(dataValidation, {
             abortEarly: false,
         })
 
-        await confeitariaRepository.update(id, data);
+        if (nome) confeitaria.nome = nome;
+        if (cpf) confeitaria.cpf = cpf;
+        if (nome_negocio) confeitaria.nome_negocio = nome_negocio;
+        if (cnpj) confeitaria.cnpj = cnpj;
+        if (descricao) confeitaria.descricao = descricao;
+        if (telefone) confeitaria.telefone = telefone;
+        if (rua) confeitaria.rua = rua;
+        if (numero) confeitaria.numero = numero;
+        if (complemento) confeitaria.complemento = complemento;
+        if (bairro) confeitaria.bairro = bairro;
+        if (cidade) confeitaria.cidade = cidade;
+        if (estado) confeitaria.estado = estado;
+        if (requestLogo) confeitaria.logo_path = requestLogo.filename;
 
-        const confeitaria = await confeitariaRepository.findOneOrFail(id, {
-            relations: ['logo'],
-        });
+        await confeitariaRepository.save(confeitaria);
 
         return response.status(201).json(confeitariaView.render(confeitaria));
     },
+
+    // Apaga os dados de uma confeitaria
+    async delete(request: Request, response: Response) {
+        const { id } = request.body;
+
+        const confeitariaRepository = getRepository(Confeitaria);
+
+        await confeitariaRepository.delete(id);
+
+        return response.json({ message: 'Deletado com sucesso! '});
+    },    
 }
