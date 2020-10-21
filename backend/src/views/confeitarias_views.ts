@@ -4,6 +4,8 @@ export default {
     render(confeitaria: Confeitaria) {
         return {
             id: confeitaria.id,
+            email: confeitaria.email,
+            senha: confeitaria.senha,
             nome: confeitaria.nome,
             cpf: confeitaria.cpf,
             nome_negocio: confeitaria.nome_negocio,

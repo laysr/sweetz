@@ -12,5 +12,6 @@ routes.get('/confeitaria/:id', ConfeitariasController.show);
 routes.post('/confeitaria', upload.single('logo'), ConfeitariasController.create);
 routes.put('/confeitaria/:id', ConfeitariasController.update);
 routes.delete('/confeitaria', ConfeitariasController.delete);
+routes.post('/confeitaria-login', ConfeitariasController.login);
 
 export default routes;

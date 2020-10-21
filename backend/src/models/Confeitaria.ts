@@ -6,6 +6,12 @@ export default class Confeitaria {
     id: number;
 
     @Column()
+    email: string;
+
+    @Column()
+    senha: string;
+
+    @Column()
     nome: string;
 
     @Column()

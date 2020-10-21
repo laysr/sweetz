@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import confeitariaView from '../views/confeitarias_views';
 import * as Yup from 'yup';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+require('dotenv/config');
 
 import Confeitaria from '../models/Confeitaria';
 
@@ -29,6 +32,7 @@ export default {
     // Cria uma nova confeitaria no banco de dados
     async create(request: Request, response: Response) {
         const {
+            email,
             nome,
             cpf,
             nome_negocio,
@@ -43,13 +47,22 @@ export default {
             estado,
         } = request.body;
 
+        let { senha } = request.body;
+
+        await bcrypt.hash(senha, 10).then((hash) => {
+            senha = hash;
+        });
+
         const confeitariaRepository = getRepository(Confeitaria);
 
         const requestLogo = request.file as Express.Multer.File;
 
-        const logo_path = requestLogo.filename;
+        let logo_path = '';
+        if (requestLogo) logo_path = requestLogo.filename;
 
         const data = {
+            email,
+            senha,
             nome,
             cpf,
             nome_negocio,
@@ -66,6 +79,8 @@ export default {
         }
 
         const schema = Yup.object().shape({
+            email: Yup.string().required(),
+            senha: Yup.string().required(),
             nome: Yup.string().required(),
             cpf: Yup.number().required(),
             nome_negocio: Yup.string().required(),
@@ -93,14 +108,15 @@ export default {
     },
 
     // Atualiza os dados de uma confeitaria
-    async update(request: Request, response: Response){
+    async update(request: Request, response: Response) {
         interface LooseObject {
             [key: string]: any
         }
 
         const { id } = request.params;
-        
+
         const {
+            email,
             nome,
             cpf,
             nome_negocio,
@@ -115,15 +131,23 @@ export default {
             estado,
         } = request.body;
 
+        let { senha } = request.body;
+
+        await bcrypt.hash(senha, 10).then((hash) => {
+            senha = hash;
+        });
+
         const requestLogo = request.file as Express.Multer.File;
-        
+
         const confeitariaRepository = getRepository(Confeitaria);
-        
+
         const confeitaria = await confeitariaRepository.findOneOrFail(id);
 
         // Validação dos dados
         const dataValidation: LooseObject = {
             id,
+            email,
+            senha,
             nome,
             cpf,
             nome_negocio,
@@ -138,10 +162,12 @@ export default {
             estado,
         }
 
-        if(requestLogo) dataValidation.logo_path = requestLogo.filename;
+        if (requestLogo) dataValidation.logo_path = requestLogo.filename;
 
         const schema = Yup.object().shape({
             id: Yup.number().required(),
+            email: Yup.string(),
+            senha: Yup.string(),
             nome: Yup.string(),
             cpf: Yup.number(),
             nome_negocio: Yup.string(),
@@ -162,6 +188,8 @@ export default {
         })
 
         if (nome) confeitaria.nome = nome;
+        if (email) confeitaria.email = email;
+        if (senha) confeitaria.senha = senha;
         if (cpf) confeitaria.cpf = cpf;
         if (nome_negocio) confeitaria.nome_negocio = nome_negocio;
         if (cnpj) confeitaria.cnpj = cnpj;
@@ -188,6 +216,33 @@ export default {
 
         await confeitariaRepository.delete(id);
 
-        return response.json({ message: 'Deletado com sucesso! '});
-    },    
+        return response.json({ message: 'Deletado com sucesso! ' });
+    },
+
+    // Login
+    async login(request: Request, response: Response) {
+        const { email, senha } = request.body;
+
+        const confeitariaRepository = getRepository(Confeitaria);
+
+        const confeitaria = await confeitariaRepository.findOneOrFail({ email });
+
+        const senhaBD = confeitaria.senha;
+
+        const match = await bcrypt.compare(senha, senhaBD);
+
+        if (!match) {
+            return response.json({ message: 'Falha no login' });
+        }
+        else {
+            const expiresIn = 7 * 24 * 60 * 60;
+            const accessToken = jwt.sign({ id: confeitaria.id }, <string>process.env.SECRET_KEY, {
+                expiresIn: expiresIn
+            });
+            response.status(200).send({
+                "user": confeitaria.id, type: 'confeitaria', "access_token": accessToken, "expires_in": expiresIn
+            });
+            
+        }
+    }
 }

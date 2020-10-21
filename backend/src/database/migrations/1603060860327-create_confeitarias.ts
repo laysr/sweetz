@@ -15,6 +15,15 @@ export class createConfeitarias1603060860327 implements MigrationInterface {
                     generationStrategy: 'increment',
                 },
                 {
+                    name: 'email',
+                    type: 'varchar',
+                    isUnique: true,
+                },
+                {
+                    name: 'senha',
+                    type: 'text',
+                },
+                {
                     name: 'nome',
                     type: 'varchar',
                 },
