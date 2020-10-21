@@ -236,13 +236,13 @@ export default {
         }
         else {
             const expiresIn = 7 * 24 * 60 * 60;
-            const accessToken = jwt.sign({ id: confeitaria.id }, <string>process.env.SECRET_KEY, {
+            const accessToken = jwt.sign({ id: confeitaria.id }, <string>process.env.SECRET_KEY_CONFEITARIA, {
                 expiresIn: expiresIn
             });
             response.status(200).send({
                 "user": confeitaria.id, type: 'confeitaria', "access_token": accessToken, "expires_in": expiresIn
             });
-            
+
         }
     }
 }
