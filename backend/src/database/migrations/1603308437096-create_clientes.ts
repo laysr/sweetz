@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class createConfeitarias1603060860327 implements MigrationInterface {
+export class createClientes1603308437096 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: 'confeitarias',
+            name: 'clientes',
             columns: [
                 {
                     name: 'id',
@@ -32,21 +32,9 @@ export class createConfeitarias1603060860327 implements MigrationInterface {
                     type: 'integer',
                 },
                 {
-                    name: 'nome_negocio',
-                    type: 'varchar',
-                },
-                {
-                    name: 'cnpj',
-                    type: 'number',
-                    isNullable: true,
-                },
-                {
-                    name: 'descricao',
-                    type: 'text',
-                },
-                {
                     name: 'telefone',
                     type: 'integer',
+                    isNullable: true,
                 },
                 {
                     name: 'rua',
@@ -62,6 +50,11 @@ export class createConfeitarias1603060860327 implements MigrationInterface {
                     isNullable: true,
                 },
                 {
+                    name: 'referencia',
+                    type: 'varchar',
+                    isNullable: true,
+                },
+                {
                     name: 'bairro',
                     type: 'varchar'
                 },
@@ -72,11 +65,6 @@ export class createConfeitarias1603060860327 implements MigrationInterface {
                 {
                     name: 'estado',
                     type: 'varchar'
-                },
-                {
-                    name: 'logo_path',
-                    type: 'varchar',
-                    isNullable: true,
                 },
             ],
         }));

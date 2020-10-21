@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('confeitarias')
-export default class Confeitaria {
+@Entity('clientes')
+export default class Cliente {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
@@ -18,15 +18,6 @@ export default class Confeitaria {
     cpf: number;
 
     @Column()
-    nome_negocio: string;
-
-    @Column()
-    cnpj: number;
-
-    @Column()
-    descricao: string;
-
-    @Column()
     telefone: number;
 
     @Column()
@@ -39,6 +30,9 @@ export default class Confeitaria {
     complemento: string;
 
     @Column()
+    referencia: string;
+
+    @Column()
     bairro: string;
 
     @Column()
@@ -46,7 +40,4 @@ export default class Confeitaria {
 
     @Column()
     estado: string;
-
-    @Column()
-    logo_path: string;
 }
