@@ -47,7 +47,8 @@ export default {
 
         let { senha } = request.body;
 
-        await bcrypt.hash(senha, 10).then((hash) => {
+        console.log(senha);
+        await bcrypt.hash(senha, 10).then(function (hash) {
             senha = hash;
         });
 
@@ -211,7 +212,7 @@ export default {
         }
         else {
             const expiresIn = 7 * 24 * 60 * 60;
-            const accessToken = jwt.sign({ id: cliente.id }, <string>process.env.SECRET_KEY_CONFEITARIA, {
+            const accessToken = jwt.sign({ id: cliente.id }, <string>process.env.SECRET_KEY_CLIENTE, {
                 expiresIn: expiresIn
             });
             response.status(200).send({

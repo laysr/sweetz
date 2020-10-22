@@ -10,6 +10,7 @@ export default (req: Request, res: Response, next: NextFunction) => {
         jwt.verify(token, <string>process.env.SECRET_KEY_CLIENTE);
         next();
     } catch (error) {
+        console.log(error);
         res.status(401).json({ message: "Authentication failed!" });
     }
 };
