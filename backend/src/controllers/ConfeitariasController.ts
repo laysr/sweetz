@@ -4,7 +4,6 @@ import confeitariaView from '../views/confeitarias_views';
 import * as Yup from 'yup';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-require('dotenv/config');
 
 import Confeitaria from '../models/Confeitaria';
 
@@ -79,7 +78,7 @@ export default {
         }
 
         const schema = Yup.object().shape({
-            email: Yup.string().required(),
+            email: Yup.string().email().required(),
             senha: Yup.string().required(),
             nome: Yup.string().required(),
             cpf: Yup.number().required(),
@@ -98,7 +97,7 @@ export default {
 
         await schema.validate(data, {
             abortEarly: false,
-        })
+        });
 
         const confeitaria = confeitariaRepository.create(data);
 
@@ -166,7 +165,7 @@ export default {
 
         const schema = Yup.object().shape({
             id: Yup.number().required(),
-            email: Yup.string(),
+            email: Yup.string().email(),
             senha: Yup.string(),
             nome: Yup.string(),
             cpf: Yup.number(),
@@ -185,7 +184,7 @@ export default {
 
         await schema.validate(dataValidation, {
             abortEarly: false,
-        })
+        });
 
         if (nome) confeitaria.nome = nome;
         if (email) confeitaria.email = email;

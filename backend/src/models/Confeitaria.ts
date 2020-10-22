@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from 'typeorm';
+import { IsEmail } from 'class-validator';
+import Ingrediente from './Ingrediente';
 
 @Entity('confeitarias')
 export default class Confeitaria {
@@ -6,6 +8,7 @@ export default class Confeitaria {
     id: number;
 
     @Column()
+    @IsEmail()
     email: string;
 
     @Column()
@@ -49,4 +52,10 @@ export default class Confeitaria {
 
     @Column()
     logo_path: string;
+
+    @OneToMany(type => Ingrediente, ingredientes => ingredientes.confeitaria, {
+        cascade: ['insert', 'update']
+    })
+    @JoinColumn({ name: 'cod_confeitaria' })
+    ingredientes: Ingrediente[];
 }

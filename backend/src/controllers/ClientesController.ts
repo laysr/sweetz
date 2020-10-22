@@ -4,7 +4,6 @@ import clienteView from '../views/clientes_views';
 import * as Yup from 'yup';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-require('dotenv/config');
 
 import Cliente from '../models/Cliente';
 
@@ -70,7 +69,7 @@ export default {
         }
 
         const schema = Yup.object().shape({
-            email: Yup.string().required(),
+            email: Yup.string().email().required(),
             senha: Yup.string().required(),
             nome: Yup.string().required(),
             cpf: Yup.number().required(),
@@ -147,7 +146,7 @@ export default {
 
         const schema = Yup.object().shape({
             id: Yup.number().required(),
-            email: Yup.string(),
+            email: Yup.string().email(),
             senha: Yup.string(),
             nome: Yup.string(),
             cpf: Yup.number(),

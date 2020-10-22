@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 
 export class createIngredientes1603332243498 implements MigrationInterface {
 
@@ -19,7 +19,7 @@ export class createIngredientes1603332243498 implements MigrationInterface {
                     type: 'integer',
                 },
                 {
-                    name: 'ingrediente',
+                    name: 'nome',
                     type: 'varchar',
                 },
                 {
@@ -33,6 +33,16 @@ export class createIngredientes1603332243498 implements MigrationInterface {
                 {
                     name: 'preco',
                     type: 'decimal',
+                }
+            ],
+            foreignKeys: [
+                {
+                    name: 'ConfeitariaIngrediente',
+                    columnNames: ['cod_confeitaria'],
+                    referencedTableName: 'confeitarias',
+                    referencedColumnNames: ['id'],
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE',
                 }
             ]
         }));

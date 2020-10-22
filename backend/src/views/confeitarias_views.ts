@@ -1,4 +1,5 @@
 import Confeitaria from '../models/Confeitaria';
+import ingredientes_views from './ingredientes_views';
 
 export default {
     render(confeitaria: Confeitaria) {
@@ -19,6 +20,7 @@ export default {
             cidade: confeitaria.cidade,
             estado: confeitaria.estado,
             url: `http://localhost:3333/uploads/${confeitaria.logo_path}`,
+            ingredientes: ingredientes_views.renderMany(confeitaria.ingredientes),
         };
     },
 
