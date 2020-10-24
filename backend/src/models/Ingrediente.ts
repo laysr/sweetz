@@ -6,8 +6,8 @@ export default class Ingrediente {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @ManyToOne(type => Confeitaria, confeitaria => confeitaria.ingredientes)
-    @JoinColumn({ name: 'cod_confeitaria'})
+    @ManyToOne(() => Confeitaria, confeitaria => confeitaria.ingredientes)
+    @JoinColumn({ name: 'confeitaria'})
     confeitaria: Confeitaria;
 
     @Column()

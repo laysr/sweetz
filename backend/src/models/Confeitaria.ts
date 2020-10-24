@@ -53,9 +53,9 @@ export default class Confeitaria {
     @Column()
     logo_path: string;
 
-    @OneToMany(type => Ingrediente, ingredientes => ingredientes.confeitaria, {
-        cascade: ['insert', 'update']
+    @OneToMany(() => Ingrediente, ingrediente => ingrediente.confeitaria, {
+        cascade: ['insert', 'update'],
     })
-    @JoinColumn({ name: 'cod_confeitaria' })
+    @JoinColumn({ name: 'confeitaria' })
     ingredientes: Ingrediente[];
 }

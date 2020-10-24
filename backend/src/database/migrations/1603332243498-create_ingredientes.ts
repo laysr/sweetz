@@ -15,7 +15,7 @@ export class createIngredientes1603332243498 implements MigrationInterface {
                     generationStrategy: 'increment',
                 },
                 {
-                    name: 'cod_confeitaria',
+                    name: 'confeitaria',
                     type: 'integer',
                 },
                 {
@@ -38,7 +38,7 @@ export class createIngredientes1603332243498 implements MigrationInterface {
             foreignKeys: [
                 {
                     name: 'ConfeitariaIngrediente',
-                    columnNames: ['cod_confeitaria'],
+                    columnNames: ['confeitaria'],
                     referencedTableName: 'confeitarias',
                     referencedColumnNames: ['id'],
                     onUpdate: 'CASCADE',

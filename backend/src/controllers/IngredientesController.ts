@@ -31,7 +31,7 @@ export default {
     // Cria um ingrediente
     async create (request: Request, response: Response) {
         const {
-            cod_confeitaria,
+            confeitaria,
             nome,
             quantidade,
             unidade, 
@@ -41,7 +41,7 @@ export default {
         const ingredienteRepository = getRepository(Ingrediente);
 
         const data = {
-            cod_confeitaria,
+            confeitaria,
             nome,
             quantidade,
             unidade,
@@ -49,7 +49,7 @@ export default {
         }
 
         const schema = Yup.object().shape({
-            cod_confeitaria: Yup.number().required(),
+            confeitaria: Yup.number().required(),
             nome: Yup.string().required(),
             quantidade: Yup.number().required(),
             unidade: Yup.string().required(),
@@ -72,7 +72,7 @@ export default {
         const { id } = request.params;
 
         const {
-            cod_confeitaria,
+            confeitaria,
             nome,
             quantidade,
             unidade, 
@@ -85,7 +85,7 @@ export default {
 
         const data = {
             id,
-            cod_confeitaria,
+            confeitaria,
             nome,
             quantidade,
             unidade,
@@ -94,7 +94,7 @@ export default {
 
         const schema = Yup.object().shape({
             id: Yup.number().required(),
-            cod_confeitaria: Yup.number(),
+            confeitaria: Yup.number(),
             nome: Yup.string(),
             quantidade: Yup.number(),
             unidade: Yup.string(),

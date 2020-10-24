@@ -4,7 +4,7 @@ export default {
     render(ingrediente: Ingrediente) {
         return {
             id: ingrediente.id,
-            cod_confeitaria: ingrediente.confeitaria,
+            confeitaria: ingrediente.confeitaria,
             ingrediente: ingrediente.nome,
             quantidade: ingrediente.quantidade,
             unidade: ingrediente.unidade,
