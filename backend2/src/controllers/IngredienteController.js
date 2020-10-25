@@ -39,6 +39,9 @@ class IngredienteController {
   async create(req, res) {
     try {
       const dados = req.body;
+      dados.custo = 0;
+      // dados.preco = parseFloat(dados.preco);
+      // dados.custo = parseFloat(dados.custo);
       dados.confeitaria_id = req.userId;
       const novoIngrediente = await Ingrediente.create(dados);
 

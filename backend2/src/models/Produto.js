@@ -1,6 +1,8 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class Cliente extends Model {
+import appConfig from '../config/appConfig';
+
+export default class Produto extends Model {
   static init(sequelize) {
     super.init({
       confeitaria_id: {
@@ -17,33 +19,33 @@ export default class Cliente extends Model {
           },
         },
       },
-      quantidade: {
-        type: Sequelize.INTEGER,
-        defaultValue: '',
-      },
-      unidade: {
+      descricao: {
         type: Sequelize.STRING,
         defaultValue: '',
-        validate: {
-          len: {
-            args: [1, 4],
-            msg: 'Campo unidade deve ter entre 1 e 4 caracteres',
-          },
-        },
       },
       preco: {
         type: Sequelize.FLOAT,
+        defaultValue: 0.0,
+      },
+      custo: {
+        type: Sequelize.FLOAT,
+        defaultValue: 0.0,
+      },
+      image: {
+        type: Sequelize.STRING,
         defaultValue: '',
+      },
+      imagem_url: {
+        type: Sequelize.VIRTUAL,
+        get() {
+          return `${appConfig.url}/images/${this.getDataValue('image')}`;
+        },
       },
     }, {
       sequelize,
-      tableName: 'ingredientes',
+      tableName: 'produtos',
     });
 
     return this;
-  }
-
-  static associate(models) {
-    this.belongsTo(models.Confeitaria, { foreignKey: 'confeitaria_id' });
   }
 }

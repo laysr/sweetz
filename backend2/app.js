@@ -12,6 +12,7 @@ import tokenRoutes from './src/routes/tokenRoutes';
 import confeitariaRoutes from './src/routes/confeitariaRoutes';
 import clienteRoutes from './src/routes/clienteRoutes';
 import ingredienteRoutes from './src/routes/ingredienteRoutes';
+import produtoRoutes from './src/routes/produtoRoutes';
 
 class App {
   constructor() {
@@ -32,6 +33,7 @@ class App {
     this.app.use('/confeitarias/', confeitariaRoutes);
     this.app.use('/clientes/', clienteRoutes);
     this.app.use('/ingredientes/', ingredienteRoutes);
+    this.app.use('/produtos/', produtoRoutes);
   }
 }
 
