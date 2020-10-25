@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import { resolve } from 'path';
 
 dotenv.config();
 
@@ -7,9 +8,10 @@ import './src/database';
 import express from 'express';
 
 import homeRoutes from './src/routes/homeRoutes';
+import tokenRoutes from './src/routes/tokenRoutes';
 import confeitariaRoutes from './src/routes/confeitariaRoutes';
 import clienteRoutes from './src/routes/clienteRoutes';
-import tokenRoutes from './src/routes/tokenRoutes';
+import ingredienteRoutes from './src/routes/ingredienteRoutes';
 
 class App {
   constructor() {
@@ -21,13 +23,15 @@ class App {
   middlewares() {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
+    this.app.use(express.static(resolve(__dirname, 'uploads')));
   }
 
   routes() {
     this.app.use('/', homeRoutes);
+    this.app.use('/login/', tokenRoutes);
     this.app.use('/confeitarias/', confeitariaRoutes);
     this.app.use('/clientes/', clienteRoutes);
-    this.app.use('/login/', tokenRoutes);
+    this.app.use('/ingredientes/', ingredienteRoutes);
   }
 }
 

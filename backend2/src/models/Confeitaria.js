@@ -1,6 +1,8 @@
 import Sequelize, { Model } from 'sequelize';
 import bcryptjs from 'bcryptjs';
 
+import appConfig from '../config/appConfig';
+
 export default class Confeitaria extends Model {
   static init(sequelize) {
     super.init({
@@ -83,6 +85,12 @@ export default class Confeitaria extends Model {
       logo: {
         type: Sequelize.STRING,
         defaultValue: '',
+      },
+      logo_url: {
+        type: Sequelize.VIRTUAL,
+        get() {
+          return `${appConfig.url}/images/${this.getDataValue('logo')}`;
+        },
       },
     }, {
       sequelize,

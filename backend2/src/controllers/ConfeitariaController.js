@@ -19,6 +19,8 @@ class ConfeitariaController {
           'bairro',
           'cidade',
           'estado',
+          'logo',
+          'logo_url',
         ],
       });
       return res.status(200).json(confeitarias);
@@ -55,6 +57,8 @@ class ConfeitariaController {
           'bairro',
           'cidade',
           'estado',
+          'logo',
+          'logo_url',
         ],
       });
 
@@ -78,7 +82,7 @@ class ConfeitariaController {
       const dados = req.body;
       if (req.file) dados.logo = req.file.filename;
 
-      const novoCliente = await Confeitaria.create(dados);
+      const novaConfeitaria = await Confeitaria.create(dados);
 
       const {
         id,
@@ -95,7 +99,8 @@ class ConfeitariaController {
         cidade,
         estado,
         logo,
-      } = novoCliente;
+        logo_url,
+      } = novaConfeitaria;
 
       req.userId = id;
 
@@ -114,6 +119,7 @@ class ConfeitariaController {
         cidade,
         estado,
         logo,
+        logo_url,
       });
     } catch (error) {
       return res
@@ -157,6 +163,7 @@ class ConfeitariaController {
         cidade,
         estado,
         logo,
+        logo_url,
       } = novosDados;
 
       return res.status(200).json({
@@ -175,6 +182,7 @@ class ConfeitariaController {
         cidade,
         estado,
         logo,
+        logo_url,
       });
     } catch (error) {
       return res
