@@ -1,0 +1,113 @@
+const bcryptjs = require('bcryptjs');
+
+module.exports = {
+  up: async (queryInterface) => {
+    await queryInterface.bulkInsert('clientes', [
+      {
+        email: 'lais@email.com',
+        senha_hash: await bcryptjs.hash('123456', 10),
+        nome: 'Laís',
+        cpf: '00000000001',
+        telefone: '999999999',
+        rua: 'Rua A',
+        numero: 112,
+        complemento: 'apto. 207',
+        referencia: 'Perto do churrasquinho',
+        bairro: 'Jatiúca',
+        cidade: 'Maceió',
+        estado: 'Alagoas',
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        email: 'raul@email.com',
+        senha_hash: await bcryptjs.hash('123456', 10),
+        nome: 'Raul',
+        cpf: '00000000002',
+        telefone: '999999999',
+        rua: 'Rua B',
+        numero: 162,
+        complemento: 'apto. 106',
+        referencia: 'Perto do restaurante italiano',
+        bairro: 'Farol',
+        cidade: 'Maceió',
+        estado: 'Alagoas',
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        email: 'raissa@email.com',
+        senha_hash: await bcryptjs.hash('123456', 10),
+        nome: 'Raissa',
+        cpf: '00000000006',
+        telefone: '999999999',
+        rua: 'Rua F',
+        numero: 953,
+        complemento: '',
+        referencia: 'Perto da academia',
+        bairro: 'Serraria',
+        cidade: 'Maceió',
+        estado: 'Alagoas',
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        email: 'anna@email.com',
+        senha_hash: await bcryptjs.hash('123456', 10),
+        nome: 'Anna Luisa',
+        cpf: '00000000003',
+        telefone: '999999999',
+        rua: 'Rua C',
+        numero: 638,
+        complemento: 'apto. 904',
+        referencia: 'Perto da Bali',
+        bairro: 'Pajuçara',
+        cidade: 'Maceió',
+        estado: 'Alagoas',
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        email: 'beatriz@email.com',
+        senha_hash: await bcryptjs.hash('123456', 10),
+        nome: 'Beatriz',
+        cpf: '00000000004',
+        telefone: '999999999',
+        rua: 'Rua D',
+        numero: 427,
+        complemento: 'apto. 202',
+        referencia: 'Perto do petshop',
+        bairro: 'Ponta Verde',
+        cidade: 'Maceió',
+        estado: 'Alagoas',
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        email: 'katarina@email.com',
+        senha_hash: await bcryptjs.hash('123456', 10),
+        nome: 'Katarina',
+        cpf: '00000000005',
+        telefone: '999999999',
+        rua: 'Rua E',
+        numero: 836,
+        complemento: '',
+        referencia: 'Perto do salão de beleza',
+        bairro: 'Feitosa',
+        cidade: 'Maceió',
+        estado: 'Alagoas',
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    ], {});
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
+  },
+};

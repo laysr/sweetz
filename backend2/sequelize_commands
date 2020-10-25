@@ -1,0 +1,11 @@
+Sequelize
+
+Migrations:
+npx sequelize migration:generate --name nome_da_migration
+npx sequelize db:migrate
+npx sequelize db:migrate:undo:all
+
+Seeds
+npx sequelize seed:generate --name nome_da_seed
+npx sequelize db:seed
+npx sequelize db:seed:undo:all

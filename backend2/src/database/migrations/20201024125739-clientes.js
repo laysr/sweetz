@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('confeitarias', {
+    await queryInterface.createTable('clientes', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -24,14 +24,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      nome_confeitaria: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      cnpj: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
       telefone: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -48,6 +40,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      referencia: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       bairro: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -59,10 +55,6 @@ module.exports = {
       estado: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-      logo_path: {
-        type: Sequelize.STRING,
-        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -76,6 +68,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('confeitarias');
+    await queryInterface.dropTable('clientes');
   },
 };

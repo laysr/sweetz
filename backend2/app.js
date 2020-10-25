@@ -5,7 +5,11 @@ dotenv.config();
 import './src/database';
 
 import express from 'express';
+
 import homeRoutes from './src/routes/homeRoutes';
+import confeitariaRoutes from './src/routes/confeitariaRoutes';
+import clienteRoutes from './src/routes/clienteRoutes';
+import tokenRoutes from './src/routes/tokenRoutes';
 
 class App {
   constructor() {
@@ -21,6 +25,9 @@ class App {
 
   routes() {
     this.app.use('/', homeRoutes);
+    this.app.use('/confeitarias/', confeitariaRoutes);
+    this.app.use('/clientes/', clienteRoutes);
+    this.app.use('/login/', tokenRoutes);
   }
 }
 
