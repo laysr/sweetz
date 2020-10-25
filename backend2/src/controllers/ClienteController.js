@@ -117,7 +117,35 @@ class ClienteController {
 
       const novosDados = await cliente.update(req.body);
 
-      return res.status(200).json(novosDados);
+      const {
+        id,
+        email,
+        nome,
+        cpf,
+        telefone,
+        rua,
+        numero,
+        complemento,
+        referencia,
+        bairro,
+        cidade,
+        estado,
+      } = novosDados;
+
+      return res.status(200).json({
+        id,
+        email,
+        nome,
+        cpf,
+        telefone,
+        rua,
+        numero,
+        complemento,
+        referencia,
+        bairro,
+        cidade,
+        estado,
+      });
     } catch (error) {
       return res
         .status(400)

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import Confeitaria from '../models/Confeitarias';
+import Confeitaria from '../models/Confeitaria';
 
 export default async (req, res, next) => {
   const { authorization } = req.headers;

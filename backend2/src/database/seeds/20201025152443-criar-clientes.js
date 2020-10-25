@@ -29,7 +29,7 @@ module.exports = {
         numero: 162,
         complemento: 'apto. 106',
         referencia: 'Perto do restaurante italiano',
-        bairro: 'Farol',
+        bairro: 'Tabuleiro dos Martins',
         cidade: 'Maceió',
         estado: 'Alagoas',
         created_at: new Date(),
@@ -102,12 +102,7 @@ module.exports = {
     ], {});
   },
 
-  down: async (queryInterface, Sequelize) => {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+  down: async (queryInterface) => {
+    await queryInterface.bulkDelete('clientes', null, {});
   },
 };

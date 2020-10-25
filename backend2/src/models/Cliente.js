@@ -78,6 +78,7 @@ export default class Cliente extends Model {
       },
     }, {
       sequelize,
+      tableName: 'clientes',
     });
 
     this.addHook('beforeSave', async (cliente) => {

@@ -1,4 +1,4 @@
-import Confeitaria from '../models/Confeitarias';
+import Confeitaria from '../models/Confeitaria';
 
 class ConfeitariaController {
   // Listagem de confeitarias
@@ -57,6 +57,13 @@ class ConfeitariaController {
           'estado',
         ],
       });
+
+      if (!confeitaria) {
+        return res.status(400).json({
+          errors: ['Confeitaria não encontrada'],
+        });
+      }
+
       return res.status(200).json(confeitaria);
     } catch (error) {
       return res
@@ -68,13 +75,16 @@ class ConfeitariaController {
   // Cadastro de Clientes
   async create(req, res) {
     try {
-      const novoCliente = await Confeitaria.create(req.body);
+      const dados = req.body;
+      if (req.file) dados.logo = req.file.filename;
+
+      const novoCliente = await Confeitaria.create(dados);
+
       const {
         id,
         email,
         nome,
         cpf,
-        // eslint-disable-next-line camelcase
         nome_confeitaria,
         cnpj,
         telefone,
@@ -84,7 +94,10 @@ class ConfeitariaController {
         bairro,
         cidade,
         estado,
+        logo,
       } = novoCliente;
+
+      req.userId = id;
 
       return res.json({
         id,
@@ -100,6 +113,7 @@ class ConfeitariaController {
         bairro,
         cidade,
         estado,
+        logo,
       });
     } catch (error) {
       return res
@@ -113,12 +127,6 @@ class ConfeitariaController {
     try {
       const { userId } = req;
 
-      if (!userId) {
-        return res.status(400).json({
-          errors: ['ID não enviado'],
-        });
-      }
-
       const confeitaria = await Confeitaria.findByPk(userId);
 
       if (!confeitaria) {
@@ -127,9 +135,47 @@ class ConfeitariaController {
         });
       }
 
-      const novosDados = await confeitaria.update(req.body);
+      const dados = req.body;
+      console.log(req);
+      if (req.file) dados.logo = req.file.filename;
 
-      return res.status(200).json(novosDados);
+      const novosDados = await confeitaria.update(dados);
+
+      const {
+        id,
+        email,
+        nome,
+        cpf,
+        nome_confeitaria,
+        cnpj,
+        telefone,
+        rua,
+        numero,
+        complemento,
+        referencia,
+        bairro,
+        cidade,
+        estado,
+        logo,
+      } = novosDados;
+
+      return res.status(200).json({
+        id,
+        email,
+        nome,
+        cpf,
+        nome_confeitaria,
+        cnpj,
+        telefone,
+        rua,
+        numero,
+        complemento,
+        referencia,
+        bairro,
+        cidade,
+        estado,
+        logo,
+      });
     } catch (error) {
       return res
         .status(400)
@@ -141,12 +187,6 @@ class ConfeitariaController {
   async delete(req, res) {
     try {
       const { userId } = req;
-
-      if (!userId) {
-        return res.status(400).json({
-          errors: ['ID não enviado'],
-        });
-      }
 
       const confeitaria = await Confeitaria.findByPk(userId);
 

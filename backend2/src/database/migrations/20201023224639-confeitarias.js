@@ -60,7 +60,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      logo_path: {
+      logo: {
         type: Sequelize.STRING,
         allowNull: true,
       },

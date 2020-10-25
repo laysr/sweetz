@@ -1,7 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 import bcryptjs from 'bcryptjs';
 
-export default class Confeitarias extends Model {
+export default class Confeitaria extends Model {
   static init(sequelize) {
     super.init({
       email: {
@@ -80,12 +80,13 @@ export default class Confeitarias extends Model {
         type: Sequelize.STRING,
         defaultValue: '',
       },
-      logo_path: {
+      logo: {
         type: Sequelize.STRING,
         defaultValue: '',
       },
     }, {
       sequelize,
+      tableName: 'confeitarias',
     });
 
     this.addHook('beforeSave', async (cliente) => {

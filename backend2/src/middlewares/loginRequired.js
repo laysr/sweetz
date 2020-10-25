@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import Confeitaria from '../models/Confeitarias';
+import Confeitaria from '../models/Confeitaria';
 import Cliente from '../models/Cliente';
 
 export default async (req, res, next) => {

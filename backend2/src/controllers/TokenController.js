@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Cliente from '../models/Cliente';
-import Confeitaria from '../models/Confeitarias';
+import Confeitaria from '../models/Confeitaria';
 
 class TokenController {
   async clienteStore(req, res) {
