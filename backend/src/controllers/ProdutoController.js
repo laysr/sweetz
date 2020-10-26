@@ -144,7 +144,9 @@ class ProdutoController {
   async custo(req, res) {
     const { id } = req.body;
 
-    const confeitaria = await Confeitaria.findByPk(req.userId);
+    const confeitaria = await Confeitaria.findByPk(req.userId, {
+      attributes: ['lucro_desejado'],
+    });
 
     const produto = await Produto.findByPk(id, {
       include: [
@@ -174,15 +176,16 @@ class ProdutoController {
       }, 0);
       custo = custo.toFixed(2);
 
-      if (confeitaria.lucro_desejado) {
-        preco_sugerido = custo * (1 + confeitaria.lucro_desejado);
+      if (confeitaria.dataValues.lucro_desejado) {
+        preco_sugerido = custo * (1 + parseFloat(confeitaria.dataValues.lucro_desejado));
+        preco_sugerido = preco_sugerido.toFixed(2);
       }
 
       const produtoAtualizado = await produto.update({
         custo: parseFloat(custo),
-        preco_sugerido: parseFloat(preco_sugerido),
+        preco_sugerido,
       });
-
+      console.log(preco_sugerido);
       return res.json(produtoAtualizado);
     }
 

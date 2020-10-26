@@ -31,6 +31,10 @@ export default class Produto extends Model {
         type: Sequelize.FLOAT,
         defaultValue: 0.0,
       },
+      preco_sugerido: {
+        type: Sequelize.FLOAT,
+        defaultValue: 0.0,
+      },
       image: {
         type: Sequelize.STRING,
         defaultValue: '',
