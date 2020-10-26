@@ -11,10 +11,11 @@ const upload = multer(multerConfig);
 
 const router = new Router();
 
-router.get('/', confeitariaLoginRequired, produtoController.index); // Lista todas as confeitarias
-router.get('/:id', confeitariaLoginRequired, produtoController.show); // Mostra os dados da confeitaria logada
-router.post('/', confeitariaLoginRequired, upload.single('image'), produtoController.create); // Cadastra uma nova confeitaria
-router.put('/:id', confeitariaLoginRequired, upload.single('image'), produtoController.update); // Atualiza a confeitaria logada
-router.delete('/:id', confeitariaLoginRequired, produtoController.delete); // Apaga a confeitaria logada
+router.get('/', confeitariaLoginRequired, produtoController.index); // Lista todos os produtos da confeitaria logada
+router.get('/:id', confeitariaLoginRequired, produtoController.show); // Mostra os dados do produto
+router.post('/', confeitariaLoginRequired, upload.single('image'), produtoController.create); // Cadastra um novo produto
+router.put('/', confeitariaLoginRequired, produtoController.custo); // Calcula o custo de um produto
+router.put('/:id', confeitariaLoginRequired, upload.single('image'), produtoController.update); // Atualiza um produto
+router.delete('/:id', confeitariaLoginRequired, produtoController.delete); // Apaga um produto
 
 export default router;
