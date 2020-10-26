@@ -1,3 +1,4 @@
+import Confeitaria from '../models/Confeitaria';
 import Produto from '../models/Produto';
 import Ingrediente from '../models/Ingrediente';
 import IngredienteProduto from '../models/IngredienteProduto';
@@ -143,6 +144,8 @@ class ProdutoController {
   async custo(req, res) {
     const { id } = req.body;
 
+    const confeitaria = await Confeitaria.findByPk(req.userId);
+
     const produto = await Produto.findByPk(id, {
       include: [
         {
@@ -161,6 +164,7 @@ class ProdutoController {
     });
 
     let custo = 0;
+    let preco_sugerido = 0;
 
     if (produto.ingredientes) {
       custo = produto.ingredientes.reduce((ac, ingrediente) => {
@@ -169,7 +173,16 @@ class ProdutoController {
         return ac + preco;
       }, 0);
       custo = custo.toFixed(2);
-      const produtoAtualizado = await produto.update({ custo: parseFloat(custo) });
+
+      if (confeitaria.lucro_desejado) {
+        preco_sugerido = custo * (1 + confeitaria.lucro_desejado);
+      }
+
+      const produtoAtualizado = await produto.update({
+        custo: parseFloat(custo),
+        preco_sugerido: parseFloat(preco_sugerido),
+      });
+
       return res.json(produtoAtualizado);
     }
 

@@ -45,5 +45,6 @@ export default class Ingrediente extends Model {
 
   static associate(models) {
     this.belongsTo(models.Confeitaria, { foreignKey: 'confeitaria_id' });
+    this.hasMany(models.IngredienteProduto, { as: 'ingredienteProduto' });
   }
 }

@@ -29,6 +29,10 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
+      preco_sugerido: {
+        type: Sequelize.FLOAT,
+        allowNull: true,
+      },
       custo: {
         type: Sequelize.FLOAT,
         allowNull: true,

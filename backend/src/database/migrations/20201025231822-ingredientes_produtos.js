@@ -3,7 +3,7 @@ module.exports = {
     await queryInterface.createTable('ingredientes_produtos', {
       id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         autoIncrement: true,
         primaryKey: true,
       },
@@ -31,7 +31,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'ingredientes',
+          model: 'produtos',
           key: 'id',
         },
         onDelete: 'CASCADE',

@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 import IngredienteProduto from '../models/IngredienteProduto';
 import Ingrediente from '../models/Ingrediente';
 import Produto from '../models/Produto';
 
-// Produto.hasMany(IngredienteProduto);
-// IngredienteProduto.belongsTo(Produto, { as: 'ingredientes', foreignKey: 'produto_id' });
+/* Produto.hasMany(IngredienteProduto);
+IngredienteProduto.belongsTo(Produto, { as: 'ingredientes', foreignKey: 'produto_id' });
+IngredienteProduto.belongsTo(Ingrediente, { as: 'ingredienteProduto', foreignKey: 'ingrediente_id' }); */
 // Ingrediente.belongsToMany(Produto, { through: IngredienteProduto });
 // Ingrediente.belongsToMany(IngredienteProduto);
 
@@ -50,9 +52,7 @@ class IngredienteProdutoController {
       }
       return res.status(200).json(ingredientes);
     } catch (error) {
-      return res
-        .status(400)
-        .json({ errors: error });
+      return res.status(400).json({ errors: error });
     }
   }
 
@@ -68,9 +68,7 @@ class IngredienteProdutoController {
       }
       return res.status(200).json(ingrediente);
     } catch (error) {
-      return res
-        .status(400)
-        .json({ errors: error });
+      return res.status(400).json({ errors: error });
     }
   }
 
@@ -95,14 +93,30 @@ class IngredienteProdutoController {
           errors: ['Acesso não autorizado'],
         });
       }
+      /* const date = new Date();
+      dados.created_at = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+      const novoId = await IngredienteProduto.sequelize.query(
+        'INSERT INTO ingredientes_produtos (id, confeitaria_id, ingrediente_id, produto_id, quantidade, unidade, created_at, updated_at) VALUES (:id, :confeitaria_id, :ingrediente_id, :produto_id, :quantidade, :unidade, :created_at, :updated_at);',
+        {
+          model: IngredienteProduto,
+          replacements: {
+            id: 1,
+            confeitaria_id: dados.confeitaria_id,
+            ingrediente_id: dados.ingrediente_id,
+            produto_id: dados.produto_id,
+            quantidade: dados.quantidade,
+            unidade: dados.unidade,
+            created_at: dados.created_at,
+            updated_at: dados.created_at,
+          },
+        },
+      ); */
 
       const novoIngrediente = await IngredienteProduto.create(dados);
 
       return res.json(novoIngrediente);
     } catch (error) {
-      return res
-        .status(400)
-        .json({ errors: error });
+      return res.status(400).json({ errors: error });
     }
   }
 
@@ -131,9 +145,7 @@ class IngredienteProdutoController {
         });
       }
 
-      const {
-        quantidade, unidade,
-      } = req.body;
+      const { quantidade, unidade } = req.body;
 
       const ingredienteAtualizado = await ingrediente.update({
         quantidade,
@@ -142,9 +154,7 @@ class IngredienteProdutoController {
 
       return res.status(200).json(ingredienteAtualizado);
     } catch (error) {
-      return res
-        .status(400)
-        .json({ errors: error });
+      return res.status(400).json({ errors: error });
     }
   }
 
@@ -179,9 +189,7 @@ class IngredienteProdutoController {
         .status(200)
         .json({ message: 'IngredienteProduto apagado com sucesso!' });
     } catch (error) {
-      return res
-        .status(400)
-        .json({ errors: error });
+      return res.status(400).json({ errors: error });
     }
   }
 }

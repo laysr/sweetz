@@ -23,6 +23,7 @@ module.exports = {
       cpf: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       nome_confeitaria: {
         type: Sequelize.STRING,
@@ -30,6 +31,10 @@ module.exports = {
       },
       cnpj: {
         type: Sequelize.STRING,
+        allowNull: true,
+      },
+      lucro_desejado: {
+        type: Sequelize.FLOAT,
         allowNull: true,
       },
       telefone: {
