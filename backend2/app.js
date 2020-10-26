@@ -13,6 +13,7 @@ import confeitariaRoutes from './src/routes/confeitariaRoutes';
 import clienteRoutes from './src/routes/clienteRoutes';
 import ingredienteRoutes from './src/routes/ingredienteRoutes';
 import produtoRoutes from './src/routes/produtoRoutes';
+import ingredienteProdutoRoutes from './src/routes/ingredienteProdutoRoutes';
 
 class App {
   constructor() {
@@ -34,6 +35,7 @@ class App {
     this.app.use('/clientes/', clienteRoutes);
     this.app.use('/ingredientes/', ingredienteRoutes);
     this.app.use('/produtos/', produtoRoutes);
+    this.app.use('/ingredientes-produtos/', ingredienteProdutoRoutes);
   }
 }
 

@@ -1,21 +1,19 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class Ingrediente extends Model {
+export default class IngredienteProduto extends Model {
   static init(sequelize) {
     super.init({
       confeitaria_id: {
         type: Sequelize.INTEGER,
         defaultValue: null,
       },
-      nome: {
-        type: Sequelize.STRING,
-        defaultValue: '',
-        validate: {
-          len: {
-            args: [3, 255],
-            msg: 'Campo nome deve ter entre 3 e 255 caracteres',
-          },
-        },
+      ingrediente_id: {
+        type: Sequelize.INTEGER,
+        defaultValue: null,
+      },
+      produto_id: {
+        type: Sequelize.INTEGER,
+        defaultValue: null,
       },
       quantidade: {
         type: Sequelize.INTEGER,
@@ -31,13 +29,9 @@ export default class Ingrediente extends Model {
           },
         },
       },
-      preco: {
-        type: Sequelize.FLOAT,
-        defaultValue: '',
-      },
     }, {
       sequelize,
-      tableName: 'ingredientes',
+      tableName: 'ingredientes_produtos',
     });
 
     return this;
@@ -45,5 +39,7 @@ export default class Ingrediente extends Model {
 
   static associate(models) {
     this.belongsTo(models.Confeitaria, { foreignKey: 'confeitaria_id' });
+    this.belongsTo(models.Produto, { foreignKey: 'produto_id', as: 'produto' });
+    this.belongsTo(models.Ingrediente, { foreignKey: 'ingrediente_id', as: 'ingrediente' });
   }
 }
