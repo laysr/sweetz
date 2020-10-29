@@ -10,7 +10,7 @@ IngredienteProduto.belongsTo(Ingrediente, { as: 'ingredienteProduto', foreignKey
 // Ingrediente.belongsToMany(IngredienteProduto);
 
 class IngredienteProdutoController {
-  // Listagem de ingredientes por produto ou confeitaria
+  // Listagem de ingredientes por produto ou user
   async index(req, res) {
     try {
       const { produto_id } = req.body;
@@ -19,7 +19,7 @@ class IngredienteProdutoController {
         ingredientes = await IngredienteProduto.findAll({
           where: {
             produto_id,
-            confeitaria_id: req.userId,
+            user_id: req.userId,
           },
           include: [
             {
@@ -32,7 +32,7 @@ class IngredienteProdutoController {
       } else {
         ingredientes = await Produto.findAll({
           where: {
-            confeitaria_id: req.userId,
+            user_id: req.userId,
           },
           include: [
             {
@@ -61,7 +61,7 @@ class IngredienteProdutoController {
     try {
       const { id } = req.params;
       const ingrediente = await IngredienteProduto.findByPk(id);
-      if (ingrediente.confeitaria_id !== req.userId) {
+      if (ingrediente.user_id !== req.userId) {
         return res.status(401).json({
           errors: ['Acesso não autorizado'],
         });
@@ -76,19 +76,19 @@ class IngredienteProdutoController {
   async create(req, res) {
     try {
       const dados = req.body;
-      dados.confeitaria_id = req.userId;
+      dados.user_id = req.userId;
 
-      // Checa se o ingrediente pertence à confeitaria logada
+      // Checa se o ingrediente pertence à user logada
       const ingrediente = await Ingrediente.findByPk(dados.ingrediente_id);
-      if (ingrediente.confeitaria_id !== dados.confeitaria_id) {
+      if (ingrediente.user_id !== dados.user_id) {
         return res.status(401).json({
           errors: ['Acesso não autorizado'],
         });
       }
 
-      // Checa se o produto pertence à confeitaria logada
+      // Checa se o produto pertence à user logada
       const produto = await Produto.findByPk(dados.produto_id);
-      if (produto.confeitaria_id !== dados.confeitaria_id) {
+      if (produto.user_id !== dados.user_id) {
         return res.status(401).json({
           errors: ['Acesso não autorizado'],
         });
@@ -96,12 +96,12 @@ class IngredienteProdutoController {
       /* const date = new Date();
       dados.created_at = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
       const novoId = await IngredienteProduto.sequelize.query(
-        'INSERT INTO ingredientes_produtos (id, confeitaria_id, ingrediente_id, produto_id, quantidade, unidade, created_at, updated_at) VALUES (:id, :confeitaria_id, :ingrediente_id, :produto_id, :quantidade, :unidade, :created_at, :updated_at);',
+        'INSERT INTO ingredientes_produtos (id, user_id, ingrediente_id, produto_id, quantidade, unidade, created_at, updated_at) VALUES (:id, :user_id, :ingrediente_id, :produto_id, :quantidade, :unidade, :created_at, :updated_at);',
         {
           model: IngredienteProduto,
           replacements: {
             id: 1,
-            confeitaria_id: dados.confeitaria_id,
+            user_id: dados.user_id,
             ingrediente_id: dados.ingrediente_id,
             produto_id: dados.produto_id,
             quantidade: dados.quantidade,
@@ -139,7 +139,7 @@ class IngredienteProdutoController {
         });
       }
 
-      if (ingrediente.confeitaria_id !== req.userId) {
+      if (ingrediente.user_id !== req.userId) {
         return res.status(401).json({
           errors: ['Acesso não autorizado'],
         });
@@ -177,7 +177,7 @@ class IngredienteProdutoController {
         });
       }
 
-      if (ingrediente.confeitaria_id !== req.userId) {
+      if (ingrediente.user_id !== req.userId) {
         return res.status(401).json({
           errors: ['Acesso não autorizado'],
         });

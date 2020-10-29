@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('confeitarias', {
+    await queryInterface.createTable('users', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -25,7 +25,7 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      nome_confeitaria: {
+      nome_user: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -81,6 +81,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('confeitarias');
+    await queryInterface.dropTable('users');
   },
 };

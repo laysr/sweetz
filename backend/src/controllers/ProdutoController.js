@@ -1,4 +1,4 @@
-import Confeitaria from '../models/Confeitaria';
+import User from '../models/User';
 import Produto from '../models/Produto';
 import Ingrediente from '../models/Ingrediente';
 import IngredienteProduto from '../models/IngredienteProduto';
@@ -42,7 +42,7 @@ class ProdutoController {
         });
       }
 
-      if (produto.confeitaria_id !== req.userId) {
+      if (produto.user_id !== req.userId) {
         return res.status(401).json({
           errors: ['Acesso não autorizado'],
         });
@@ -58,7 +58,7 @@ class ProdutoController {
   async create(req, res) {
     try {
       const dados = req.body;
-      dados.confeitaria_id = req.userId;
+      dados.user_id = req.userId;
       if (req.file) dados.image = req.file.filename;
 
       const novoProduto = await Produto.create(dados);
@@ -82,7 +82,7 @@ class ProdutoController {
 
       const produto = await Produto.findByPk(id);
 
-      if (produto.confeitaria_id !== req.userId) {
+      if (produto.user_id !== req.userId) {
         return res.status(401).json({
           errors: ['Acesso não autorizado'],
         });
@@ -127,7 +127,7 @@ class ProdutoController {
         });
       }
 
-      if (produto.confeitaria_id !== req.userId) {
+      if (produto.user_id !== req.userId) {
         return res.status(401).json({
           errors: ['Acesso não autorizado'],
         });
@@ -144,7 +144,7 @@ class ProdutoController {
   async custo(req, res) {
     const { id } = req.body;
 
-    const confeitaria = await Confeitaria.findByPk(req.userId, {
+    const user = await User.findByPk(req.userId, {
       attributes: ['lucro_desejado'],
     });
 
@@ -176,8 +176,8 @@ class ProdutoController {
       }, 0);
       custo = custo.toFixed(2);
 
-      if (confeitaria.dataValues.lucro_desejado) {
-        preco_sugerido = custo * (1 + parseFloat(confeitaria.dataValues.lucro_desejado));
+      if (user.dataValues.lucro_desejado) {
+        preco_sugerido = custo * (1 + parseFloat(user.dataValues.lucro_desejado));
         preco_sugerido = preco_sugerido.toFixed(2);
       }
 

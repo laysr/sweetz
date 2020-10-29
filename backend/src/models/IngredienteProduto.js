@@ -3,7 +3,7 @@ import Sequelize, { Model } from 'sequelize';
 export default class IngredienteProduto extends Model {
   static init(sequelize) {
     super.init({
-      confeitaria_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         defaultValue: null,
       },
@@ -38,7 +38,7 @@ export default class IngredienteProduto extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Confeitaria, { foreignKey: 'confeitaria_id' });
+    this.belongsTo(models.User, { foreignKey: 'user_id' });
     this.belongsTo(models.Produto, { foreignKey: 'produto_id', as: 'produto' });
     this.belongsTo(models.Ingrediente, { foreignKey: 'ingrediente_id', as: 'ingrediente' });
   }

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Cliente from '../models/Cliente';
-import Confeitaria from '../models/Confeitaria';
+import User from '../models/User';
 
 class TokenController {
   async clienteStore(req, res) {
@@ -38,7 +38,7 @@ class TokenController {
     }
   }
 
-  async confeitariaStore(req, res) {
+  async userStore(req, res) {
     try {
       const { email = '', senha = '' } = req.body;
 
@@ -48,21 +48,21 @@ class TokenController {
         });
       }
 
-      const confeitaria = await Confeitaria.findOne({ where: { email } });
+      const user = await User.findOne({ where: { email } });
 
-      if (!confeitaria) {
+      if (!user) {
         return res.status(401).json({
           errors: ['Usuário não existe'],
         });
       }
 
-      if (!(await confeitaria.validacaoSenha(senha))) {
+      if (!(await user.validacaoSenha(senha))) {
         return res.status(401).json({
           errors: ['Senha incorreta'],
         });
       }
 
-      const { id } = confeitaria;
+      const { id } = user;
       const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET_CONFEITARIA, {
         expiresIn: process.env.TOKEN_EXPIRATION,
       });

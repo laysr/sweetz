@@ -6,7 +6,7 @@ class IngredienteController {
     try {
       const ingredientes = await Ingrediente.findAll({
         where: {
-          confeitaria_id: req.userId,
+          user_id: req.userId,
         },
       });
       return res.status(200).json(ingredientes);
@@ -22,7 +22,7 @@ class IngredienteController {
     try {
       const { id } = req.params;
       const ingrediente = await Ingrediente.findByPk(id);
-      if (ingrediente.confeitaria_id !== req.userId) {
+      if (ingrediente.user_id !== req.userId) {
         return res.status(401).json({
           errors: ['Acesso não autorizado'],
         });
@@ -42,7 +42,7 @@ class IngredienteController {
       dados.custo = 0;
       // dados.preco = parseFloat(dados.preco);
       // dados.custo = parseFloat(dados.custo);
-      dados.confeitaria_id = req.userId;
+      dados.user_id = req.userId;
       const novoIngrediente = await Ingrediente.create(dados);
 
       return res.json(novoIngrediente);
@@ -66,7 +66,7 @@ class IngredienteController {
 
       const ingrediente = await Ingrediente.findByPk(id);
 
-      if (ingrediente.confeitaria_id !== req.userId) {
+      if (ingrediente.user_id !== req.userId) {
         return res.status(401).json({
           errors: ['Acesso não autorizado'],
         });
@@ -116,7 +116,7 @@ class IngredienteController {
         });
       }
 
-      if (ingrediente.confeitaria_id !== req.userId) {
+      if (ingrediente.user_id !== req.userId) {
         return res.status(401).json({
           errors: ['Acesso não autorizado'],
         });

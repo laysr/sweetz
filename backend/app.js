@@ -11,8 +11,7 @@ import helmet from 'helmet';
 
 import homeRoutes from './src/routes/homeRoutes';
 import tokenRoutes from './src/routes/tokenRoutes';
-import confeitariaRoutes from './src/routes/confeitariaRoutes';
-import clienteRoutes from './src/routes/clienteRoutes';
+import userRoutes from './src/routes/userRoutes';
 import ingredienteRoutes from './src/routes/ingredienteRoutes';
 import produtoRoutes from './src/routes/produtoRoutes';
 import ingredienteProdutoRoutes from './src/routes/ingredienteProdutoRoutes';
@@ -51,8 +50,7 @@ class App {
   routes() {
     this.app.use('/', homeRoutes);
     this.app.use('/login/', tokenRoutes);
-    this.app.use('/confeitarias/', confeitariaRoutes);
-    this.app.use('/clientes/', clienteRoutes);
+    this.app.use('/user/', userRoutes);
     this.app.use('/ingredientes/', ingredienteRoutes);
     this.app.use('/produtos/', produtoRoutes);
     this.app.use('/ingredientes-produtos/', ingredienteProdutoRoutes);
