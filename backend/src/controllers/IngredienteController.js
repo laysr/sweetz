@@ -1,8 +1,24 @@
 import Ingrediente from '../models/Ingrediente';
 
 class IngredienteController {
+  // Listagem de ingredientes padrão
+  async indexPadrao(req, res) {
+    try {
+      const ingredientes = await Ingrediente.findAll({
+        where: {
+          user_id: 1,
+        },
+      });
+      return res.status(200).json(ingredientes);
+    } catch (error) {
+      return res
+        .status(400)
+        .json({ errors: error });
+    }
+  }
+
   // Listagem de ingredientes
-  async index(req, res) {
+  async indexUser(req, res) {
     try {
       const ingredientes = await Ingrediente.findAll({
         where: {

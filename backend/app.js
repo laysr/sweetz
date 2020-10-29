@@ -50,7 +50,7 @@ class App {
   routes() {
     this.app.use('/', homeRoutes);
     this.app.use('/login/', tokenRoutes);
-    this.app.use('/user/', userRoutes);
+    this.app.use('/users/', userRoutes);
     this.app.use('/ingredientes/', ingredienteRoutes);
     this.app.use('/produtos/', produtoRoutes);
     this.app.use('/ingredientes-produtos/', ingredienteProdutoRoutes);
