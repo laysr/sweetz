@@ -20,50 +20,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      cpf: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      nome_user: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      cnpj: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
       lucro_desejado: {
         type: Sequelize.FLOAT,
         allowNull: true,
-      },
-      telefone: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      rua: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      numero: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      complemento: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      bairro: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      cidade: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      estado: {
-        type: Sequelize.STRING,
-        allowNull: false,
       },
       logo: {
         type: Sequelize.STRING,

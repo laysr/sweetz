@@ -42,45 +42,9 @@ export default class User extends Model {
           },
         },
       },
-      cpf: {
-        type: Sequelize.STRING,
-        defaultValue: '',
-      },
-      nome_user: {
-        type: Sequelize.STRING,
-        defaultValue: '',
-      },
-      cnpj: {
-        type: Sequelize.STRING,
-        defaultValue: '',
-      },
-      telefone: {
-        type: Sequelize.STRING,
-        defaultValue: '',
-      },
-      rua: {
-        type: Sequelize.STRING,
-        defaultValue: '',
-      },
-      numero: {
-        type: Sequelize.INTEGER,
-        defaultValue: '',
-      },
-      complemento: {
-        type: Sequelize.STRING,
-        defaultValue: '',
-      },
-      bairro: {
-        type: Sequelize.STRING,
-        defaultValue: '',
-      },
-      cidade: {
-        type: Sequelize.STRING,
-        defaultValue: '',
-      },
-      estado: {
-        type: Sequelize.STRING,
-        defaultValue: '',
+      lucro_desejado: {
+        type: Sequelize.FLOAT,
+        defaultValue: 0.5,
       },
       logo: {
         type: Sequelize.STRING,

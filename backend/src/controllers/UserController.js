@@ -9,17 +9,7 @@ class UserController {
           'id',
           'email',
           'nome',
-          'cpf',
-          'nome_user',
-          'cnpj',
           'lucro_desejado',
-          'telefone',
-          'rua',
-          'numero',
-          'complemento',
-          'bairro',
-          'cidade',
-          'estado',
           'logo',
           'logo_url',
         ],
@@ -48,17 +38,7 @@ class UserController {
           'id',
           'email',
           'nome',
-          'cpf',
-          'nome_user',
-          'cnpj',
           'lucro_desejado',
-          'telefone',
-          'rua',
-          'numero',
-          'complemento',
-          'bairro',
-          'cidade',
-          'estado',
           'logo',
           'logo_url',
         ],
@@ -78,32 +58,22 @@ class UserController {
     }
   }
 
-  // Cadastro de Clientes
+  // Cadastro de um Usuário
   async create(req, res) {
     try {
       const dados = req.body;
       if (req.file) dados.logo = req.file.filename;
 
-      const novaUser = await User.create(dados);
+      const novoUser = await User.create(dados);
 
       const {
         id,
         email,
         nome,
-        cpf,
-        nome_user,
-        cnpj,
         lucro_desejado,
-        telefone,
-        rua,
-        numero,
-        complemento,
-        bairro,
-        cidade,
-        estado,
         logo,
         logo_url,
-      } = novaUser;
+      } = novoUser;
 
       req.userId = id;
 
@@ -111,17 +81,7 @@ class UserController {
         id,
         email,
         nome,
-        cpf,
-        nome_user,
-        cnpj,
         lucro_desejado,
-        telefone,
-        rua,
-        numero,
-        complemento,
-        bairro,
-        cidade,
-        estado,
         logo,
         logo_url,
       });
@@ -132,7 +92,7 @@ class UserController {
     }
   }
 
-  // Atualização de um user
+  // Atualização de um Usuário
   async update(req, res) {
     try {
       const { userId } = req;
@@ -155,18 +115,7 @@ class UserController {
         id,
         email,
         nome,
-        cpf,
-        nome_user,
-        cnpj,
         lucro_desejado,
-        telefone,
-        rua,
-        numero,
-        complemento,
-        referencia,
-        bairro,
-        cidade,
-        estado,
         logo,
         logo_url,
       } = novosDados;
@@ -175,18 +124,7 @@ class UserController {
         id,
         email,
         nome,
-        cpf,
-        nome_user,
-        cnpj,
         lucro_desejado,
-        telefone,
-        rua,
-        numero,
-        complemento,
-        referencia,
-        bairro,
-        cidade,
-        estado,
         logo,
         logo_url,
       });
