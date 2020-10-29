@@ -38,7 +38,7 @@ module.exports = {
         onUpdate: 'CASCADE',
       },
       quantidade: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       unidade: {

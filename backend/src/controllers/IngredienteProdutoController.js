@@ -80,7 +80,7 @@ class IngredienteProdutoController {
 
       // Checa se o ingrediente pertence à user logada
       const ingrediente = await Ingrediente.findByPk(dados.ingrediente_id);
-      if (ingrediente.user_id !== dados.user_id) {
+      if (ingrediente.user_id !== dados.user_id && ingrediente.user_id !== 1) {
         return res.status(401).json({
           errors: ['Acesso não autorizado'],
         });
@@ -93,24 +93,6 @@ class IngredienteProdutoController {
           errors: ['Acesso não autorizado'],
         });
       }
-      /* const date = new Date();
-      dados.created_at = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-      const novoId = await IngredienteProduto.sequelize.query(
-        'INSERT INTO ingredientes_produtos (id, user_id, ingrediente_id, produto_id, quantidade, unidade, created_at, updated_at) VALUES (:id, :user_id, :ingrediente_id, :produto_id, :quantidade, :unidade, :created_at, :updated_at);',
-        {
-          model: IngredienteProduto,
-          replacements: {
-            id: 1,
-            user_id: dados.user_id,
-            ingrediente_id: dados.ingrediente_id,
-            produto_id: dados.produto_id,
-            quantidade: dados.quantidade,
-            unidade: dados.unidade,
-            created_at: dados.created_at,
-            updated_at: dados.created_at,
-          },
-        },
-      ); */
 
       const novoIngrediente = await IngredienteProduto.create(dados);
 

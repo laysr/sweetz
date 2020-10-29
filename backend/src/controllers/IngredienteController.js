@@ -38,7 +38,7 @@ class IngredienteController {
     try {
       const { id } = req.params;
       const ingrediente = await Ingrediente.findByPk(id);
-      if (ingrediente.user_id !== req.userId) {
+      if (ingrediente.user_id !== req.userId && ingrediente.user_id !== 1) {
         return res.status(401).json({
           errors: ['Acesso não autorizado'],
         });

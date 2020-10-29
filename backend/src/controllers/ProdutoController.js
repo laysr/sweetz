@@ -183,7 +183,7 @@ class ProdutoController {
 
       const produtoAtualizado = await produto.update({
         custo: parseFloat(custo),
-        preco_sugerido,
+        preco_sugerido: parseFloat(preco_sugerido),
       });
       console.log(preco_sugerido);
       return res.json(produtoAtualizado);

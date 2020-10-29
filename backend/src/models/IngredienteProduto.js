@@ -16,7 +16,7 @@ export default class IngredienteProduto extends Model {
         defaultValue: null,
       },
       quantidade: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         defaultValue: '',
       },
       unidade: {
