@@ -2,7 +2,7 @@ module.exports = {
   up: async (queryInterface) => {
     await queryInterface.bulkInsert('ingredientes', [
       {
-        confeitaria_id: 1,
+        user_id: 1,
         nome: 'Farinha de Trigo',
         quantidade: 1000,
         unidade: 'g',
@@ -11,7 +11,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        confeitaria_id: 1,
+        user_id: 1,
         nome: 'Chocolate meio amargo barra',
         quantidade: 200,
         unidade: 'g',
@@ -20,7 +20,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        confeitaria_id: 1,
+        user_id: 1,
         nome: 'Leite Condensado',
         quantidade: 395,
         unidade: 'g',
@@ -29,7 +29,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        confeitaria_id: 1,
+        user_id: 1,
         nome: 'Açúcar',
         quantidade: 1000,
         unidade: 'g',
@@ -38,7 +38,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        confeitaria_id: 1,
+        user_id: 1,
         nome: 'Ovos',
         quantidade: 30,
         unidade: 'un',
@@ -47,7 +47,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        confeitaria_id: 1,
+        user_id: 1,
         nome: 'Chocolate 50% cacau em pó',
         quantidade: 200,
         unidade: 'g',
@@ -56,7 +56,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        confeitaria_id: 1,
+        user_id: 1,
         nome: 'margarina',
         quantidade: 500,
         unidade: 'g',

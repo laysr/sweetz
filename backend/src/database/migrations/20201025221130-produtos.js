@@ -7,11 +7,11 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      confeitaria_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'confeitarias',
+          model: 'users',
           key: 'id',
         },
         onDelete: 'CASCADE',

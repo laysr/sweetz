@@ -1,16 +1,16 @@
-import Confeitaria from '../models/Confeitaria';
+import User from '../models/User';
 
-class ConfeitariaController {
-  // Listagem de confeitarias
+class UserController {
+  // Listagem de users
   async index(req, res) {
     try {
-      const confeitarias = await Confeitaria.findAll({
+      const users = await User.findAll({
         attributes: [
           'id',
           'email',
           'nome',
           'cpf',
-          'nome_confeitaria',
+          'nome_user',
           'cnpj',
           'lucro_desejado',
           'telefone',
@@ -24,7 +24,7 @@ class ConfeitariaController {
           'logo_url',
         ],
       });
-      return res.status(200).json(confeitarias);
+      return res.status(200).json(users);
     } catch (error) {
       return res
         .status(400)
@@ -32,24 +32,24 @@ class ConfeitariaController {
     }
   }
 
-  // Mostra um confeitaria
+  // Mostra um user
   async show(req, res) {
     try {
       const { userId } = req;
       const { id } = req.params;
 
       let pk = id;
-      if (req.confeitaria) {
+      if (req.user) {
         pk = userId;
       }
 
-      const confeitaria = await Confeitaria.findByPk(pk, {
+      const user = await User.findByPk(pk, {
         attributes: [
           'id',
           'email',
           'nome',
           'cpf',
-          'nome_confeitaria',
+          'nome_user',
           'cnpj',
           'lucro_desejado',
           'telefone',
@@ -64,13 +64,13 @@ class ConfeitariaController {
         ],
       });
 
-      if (!confeitaria) {
+      if (!user) {
         return res.status(400).json({
-          errors: ['Confeitaria não encontrada'],
+          errors: ['User não encontrada'],
         });
       }
 
-      return res.status(200).json(confeitaria);
+      return res.status(200).json(user);
     } catch (error) {
       return res
         .status(400)
@@ -84,14 +84,14 @@ class ConfeitariaController {
       const dados = req.body;
       if (req.file) dados.logo = req.file.filename;
 
-      const novaConfeitaria = await Confeitaria.create(dados);
+      const novaUser = await User.create(dados);
 
       const {
         id,
         email,
         nome,
         cpf,
-        nome_confeitaria,
+        nome_user,
         cnpj,
         lucro_desejado,
         telefone,
@@ -103,7 +103,7 @@ class ConfeitariaController {
         estado,
         logo,
         logo_url,
-      } = novaConfeitaria;
+      } = novaUser;
 
       req.userId = id;
 
@@ -112,7 +112,7 @@ class ConfeitariaController {
         email,
         nome,
         cpf,
-        nome_confeitaria,
+        nome_user,
         cnpj,
         lucro_desejado,
         telefone,
@@ -132,14 +132,14 @@ class ConfeitariaController {
     }
   }
 
-  // Atualização de um confeitaria
+  // Atualização de um user
   async update(req, res) {
     try {
       const { userId } = req;
 
-      const confeitaria = await Confeitaria.findByPk(userId);
+      const user = await User.findByPk(userId);
 
-      if (!confeitaria) {
+      if (!user) {
         return res.status(400).json({
           errors: ['Usuário não existe'],
         });
@@ -149,14 +149,14 @@ class ConfeitariaController {
       console.log(req);
       if (req.file) dados.logo = req.file.filename;
 
-      const novosDados = await confeitaria.update(dados);
+      const novosDados = await user.update(dados);
 
       const {
         id,
         email,
         nome,
         cpf,
-        nome_confeitaria,
+        nome_user,
         cnpj,
         lucro_desejado,
         telefone,
@@ -176,7 +176,7 @@ class ConfeitariaController {
         email,
         nome,
         cpf,
-        nome_confeitaria,
+        nome_user,
         cnpj,
         lucro_desejado,
         telefone,
@@ -197,20 +197,20 @@ class ConfeitariaController {
     }
   }
 
-  // Apaga um confeitaria
+  // Apaga um user
   async delete(req, res) {
     try {
       const { userId } = req;
 
-      const confeitaria = await Confeitaria.findByPk(userId);
+      const user = await User.findByPk(userId);
 
-      if (!confeitaria) {
+      if (!user) {
         return res.status(400).json({
           errors: ['Usuário não existe'],
         });
       }
 
-      await confeitaria.destroy();
+      await user.destroy();
 
       return res.status(200).json({ message: 'Usuário apagado com sucesso!' });
     } catch (error) {
@@ -221,4 +221,4 @@ class ConfeitariaController {
   }
 }
 
-export default new ConfeitariaController();
+export default new UserController();

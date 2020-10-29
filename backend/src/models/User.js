@@ -3,7 +3,7 @@ import bcryptjs from 'bcryptjs';
 
 import appConfig from '../config/appConfig';
 
-export default class Confeitaria extends Model {
+export default class User extends Model {
   static init(sequelize) {
     super.init({
       email: {
@@ -46,7 +46,7 @@ export default class Confeitaria extends Model {
         type: Sequelize.STRING,
         defaultValue: '',
       },
-      nome_confeitaria: {
+      nome_user: {
         type: Sequelize.STRING,
         defaultValue: '',
       },
@@ -94,7 +94,7 @@ export default class Confeitaria extends Model {
       },
     }, {
       sequelize,
-      tableName: 'confeitarias',
+      tableName: 'users',
     });
 
     this.addHook('beforeSave', async (cliente) => {

@@ -4,6 +4,6 @@ import tokenController from '../controllers/TokenController';
 const router = new Router();
 
 router.post('/cliente', tokenController.clienteStore);
-router.post('/confeitaria', tokenController.confeitariaStore);
+router.post('/user', tokenController.userStore);
 
 export default router;

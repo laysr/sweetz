@@ -2,13 +2,13 @@ const bcryptjs = require('bcryptjs');
 
 module.exports = {
   up: async (queryInterface) => {
-    await queryInterface.bulkInsert('confeitarias', [
+    await queryInterface.bulkInsert('users', [
       {
         email: 'lais@email.com',
         senha_hash: await bcryptjs.hash('123456', 10),
         nome: 'Laís',
         cpf: '00000000001',
-        nome_confeitaria: 'Laís Brownies',
+        nome_user: 'Laís Brownies',
         cnpj: '',
         telefone: '999999999',
         rua: 'Rua A',
@@ -25,7 +25,7 @@ module.exports = {
         senha_hash: await bcryptjs.hash('123456', 10),
         nome: 'Raul',
         cpf: '00000000002',
-        nome_confeitaria: 'Raul Cookies',
+        nome_user: 'Raul Cookies',
         cnpj: '',
         telefone: '999999999',
         rua: 'Rua B',
@@ -42,7 +42,7 @@ module.exports = {
         senha_hash: await bcryptjs.hash('123456', 10),
         nome: 'Raissa',
         cpf: '00000000003',
-        nome_confeitaria: 'Racca Brigadeiros',
+        nome_user: 'Racca Brigadeiros',
         cnpj: '',
         telefone: '999999999',
         rua: 'Rua F',
@@ -59,7 +59,7 @@ module.exports = {
         senha_hash: await bcryptjs.hash('123456', 10),
         nome: 'Anna Luisa',
         cpf: '00000000004',
-        nome_confeitaria: 'Anna Donuts',
+        nome_user: 'Anna Donuts',
         cnpj: '',
         telefone: '999999999',
         rua: 'Rua C',
@@ -76,7 +76,7 @@ module.exports = {
         senha_hash: await bcryptjs.hash('123456', 10),
         nome: 'Beatriz',
         cpf: '00000000005',
-        nome_confeitaria: 'Bia Brownies Veganos',
+        nome_user: 'Bia Brownies Veganos',
         cnpj: '',
         telefone: '999999999',
         rua: 'Rua D',
@@ -93,7 +93,7 @@ module.exports = {
         senha_hash: await bcryptjs.hash('123456', 10),
         nome: 'Katarina',
         cpf: '00000000006',
-        nome_confeitaria: 'Kata Bolos',
+        nome_user: 'Kata Bolos',
         cnpj: '',
         telefone: '999999999',
         rua: 'Rua E',
@@ -109,6 +109,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.bulkDelete('confeitarias', null, {});
+    await queryInterface.bulkDelete('users', null, {});
   },
 };

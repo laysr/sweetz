@@ -5,7 +5,7 @@ import appConfig from '../config/appConfig';
 export default class Produto extends Model {
   static init(sequelize) {
     super.init({
-      confeitaria_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         defaultValue: null,
       },
@@ -54,7 +54,7 @@ export default class Produto extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Confeitaria, { foreignKey: 'confeitaria_id' });
+    this.belongsTo(models.User, { foreignKey: 'user_id' });
     this.hasMany(models.IngredienteProduto, { as: 'ingredientes' });
   }
 }
