@@ -8,7 +8,7 @@ import {
   CadastrarButton,
   LoginButton,
   Botoes,
-  LandingImage,
+  LogoImage,
   Content,
   Paragraph,
   CalcularButton,
@@ -26,7 +26,7 @@ function Landing() {
             <LoginButton>Login</LoginButton>
           </Link>
         </Botoes>
-        <LandingImage src={landingPage} alt="logo" />
+        <LogoImage src={landingPage} alt="logo" />
         <Content>
           <Paragraph>
             Crie uma conta para salvar seus produtos ou clique no botão abaixo

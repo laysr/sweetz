@@ -65,7 +65,7 @@ export const Botoes = styled.div`
   }
 `;
 
-export const LandingImage = styled.img`
+export const LogoImage = styled.img`
   display: block;
   width: 50vw;
   height: 30vh;
@@ -93,6 +93,7 @@ export const Paragraph = styled.p`
   margin-right: 5px;
   font-family: 'Nova Slim', sans-serif;
   font-size: 3.5vh;
+  text-align: center;
 `;
 
 export const CalcularButton = styled.button`
