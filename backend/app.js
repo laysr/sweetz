@@ -19,6 +19,7 @@ import ingredienteProdutoRoutes from './src/routes/ingredienteProdutoRoutes';
 const whiteList = [
   'https://sweetz.anakena.com.br',
   'http://sweetz.anakena.com.br',
+  'http://localhost:3000',
   'http://localhost:3333',
 ];
 
