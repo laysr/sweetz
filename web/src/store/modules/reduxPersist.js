@@ -6,7 +6,7 @@ export default reducers => {
     {
       key: 'SWEETZ',
       storage,
-      whitelist: ['example'],
+      whitelist: ['auth'],
     },
     reducers
   );

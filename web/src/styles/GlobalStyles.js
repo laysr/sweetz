@@ -56,3 +56,30 @@ export const Container = styled.section`
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
+
+export const App = styled.body`
+  background-color: ${colors.primaryColor};
+  min-height: 100vh;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+`;
+
+export const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 95vw;
+  height: 90vh;
+  background: #ffffff;
+  border-radius: 10px;
+
+  .btn:focus {
+    outline-style: none;
+  }
+`;
