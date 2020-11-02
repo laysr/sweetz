@@ -56,7 +56,7 @@ export const Campo = styled.div`
   width: 25vw;
   height: 40vh;
   background: ${colors.secondaryColor};
-  border: 4px solid ${colors.primaryColor};
+  border: 2px solid ${colors.primaryColor};
   box-sizing: border-box;
   border-radius: 10px;
   margin-top: 30px;

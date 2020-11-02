@@ -5,10 +5,9 @@ import { isEmail } from 'validator';
 import { useDispatch } from 'react-redux';
 import { get } from 'lodash';
 
-import { App, Main } from '../../styles/GlobalStyles';
+import { App, Main, Title } from '../../styles/GlobalStyles';
 import {
   HomeButton,
-  Title,
   Paragraph,
   Campo,
   TextCampo,

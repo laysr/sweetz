@@ -11,7 +11,7 @@ export default createGlobalStyle`
   }
 
   body {
-    font-family: sans-serif;
+    font-family: 'Nova Slim', sans-serif;
     background: white;
     color: ${colors.primaryColor};
   }
@@ -57,7 +57,7 @@ export const Container = styled.section`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
-export const App = styled.body`
+export const App = styled.div`
   background-color: ${colors.primaryColor};
   min-height: 100vh;
   max-width: 100vw;
@@ -66,7 +66,7 @@ export const App = styled.body`
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #000;
 `;
 
 export const Main = styled.div`
@@ -74,12 +74,78 @@ export const Main = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  width: 95vw;
-  height: 90vh;
+  width: 97vw;
+  height: 93vh;
   background: #ffffff;
   border-radius: 10px;
+  overflow: scroll;
 
   .btn:focus {
     outline-style: none;
+  }
+`;
+
+export const Title = styled.h1`
+  color: ${colors.primaryColor};
+  font-family: 'Nova Slim', sans-serif;
+  margin-top: 10px;
+`;
+
+export const CadastrarButton = styled.button`
+  margin-right: 0px;
+  border-radius: 10px 0 0 10px;
+
+  border-right: 1px thick #000000;
+  border-bottom: 0px;
+  border-left: 0;
+  border-top: 0;
+`;
+
+export const LoginButton = styled.button`
+  border-radius: 0 10px 10px 0;
+  border: 0;
+  border-left: 1px thick #000000;
+  border-right: 0;
+  border-bottom: 0;
+  border-top: 0;
+`;
+
+export const HomeButton = styled.button`
+  background: ${colors.secondaryColor};
+  font-family: 'Nova Slim', sans-serif;
+  font-size: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  border: 0;
+  border-left: 1px thick #000000;
+  border-right: 0;
+  border-bottom: 0;
+  border-top: 0;
+
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  position: absolute;
+  left: 0vh;
+`;
+
+export const Botoes = styled.div`
+  display: flex;
+  height: 35px;
+  position: absolute;
+  right: 0vh;
+
+  button {
+    background: ${colors.secondaryColor};
+    font-family: 'Nova Slim', sans-serif;
+    font-size: 20px;
+    height: fit-content;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 `;
