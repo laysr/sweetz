@@ -63,7 +63,9 @@ export default function PageComponent() {
   });
 
   async function callApi(value) {
-    const data = await fetch(`http://localhost:3333/ingredientes/padrao`)
+    const data = await fetch(
+      `https://glowing-vehicle-275016.rj.r.appspot.com/ingredientes/padrao`
+    )
       .then(response => response.json())
       .then(response => response.map(mapResponseToValuesAndLabels))
       .then(final =>
