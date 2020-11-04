@@ -2,7 +2,8 @@
 import React from 'react';
 import AsyncSelect from 'react-select/lib/Async';
 import { Link } from 'react-router-dom';
-import { FaPlusCircle } from 'react-icons/fa';
+import { FaPlusCircle, FaWindowClose } from 'react-icons/fa';
+import * as colors from '../../config/colors';
 
 import {
   App,
@@ -30,8 +31,11 @@ const styles = {
     color: '#FFF',
     cursor: 'pointer',
   },
-  h3: {
-    marginTop: 30,
+  delete: {
+    color: colors.primaryColor,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 };
 
@@ -75,30 +79,30 @@ export default function PageComponent() {
     return data;
   }
 
-  function renderIngredientes(novoDado) {
+  /* function renderIngredientes(novoDado) {
     const table = document.getElementById('listIngredientes');
     const tr = document.createElement('tr');
     tr.innerHTML = `<td>${novoDado.nome}</td> <td>${novoDado.quantidade}${novoDado.unidade}</td> <td>R$ ${novoDado.custo}</td>`;
     tr.setAttribute('key', `${novoDado.id}`);
     tr.setAttribute('id', `ingrediente${novoDado.id}`);
     table.appendChild(tr);
-    /* dados.forEach(item => {
+    dados.forEach(item => {
       ul.innerHTML = '';
       const li = document.createElement('li');
       li.innerHTML = `${item.nome} - ${item.quantidade}${item.unidade} - R$ ${item.preco}`;
       return ul.appendChild(li);
-    }); */
-  }
+    });
+  } */
 
   function addIngrediente() {
-    let preco =
+    let custo =
       parseFloat(precoIngrediente) *
       (parseFloat(quantidadeUsada) / parseFloat(quantidadeIngrediente));
-    preco = preco.toFixed(2);
+    custo = custo.toFixed(2);
     const novoDado = {
       nome: nomeIngrediente,
       quantidade: quantidadeUsada,
-      custo: preco,
+      custo,
       id: idIngrediente,
       unidade: unidadeIngrediente,
     };
@@ -106,8 +110,43 @@ export default function PageComponent() {
     dadosCopy.push(novoDado);
     setDados(dadosCopy);
     dadosIngredientes.push(novoDado);
-    renderIngredientes(novoDado);
+    // renderIngredientes(novoDado);
   }
+
+  const renderHeader = () => {
+    const headerElement = ['Nome', 'Quantidade', 'Custo', 'Ações'];
+
+    if (dados.length > 0) {
+      return headerElement.map((key, index) => {
+        return <th key={index}>{key}</th>;
+      });
+    }
+  };
+
+  const renderBody = () => {
+    return (
+      dados &&
+      dados.map(({ id, nome, quantidade, unidade, custo }, index) => {
+        return (
+          <tr key={id}>
+            <td>{nome}</td>
+            <td>{`${quantidade}${unidade}`}</td>
+            <td>{`R$ ${custo}`}</td>
+            <td className="delete" style={styles.delete}>
+              <FaWindowClose
+                onClick={() => {
+                  const novoDado = Array.from(dados);
+                  novoDado.splice(index, 1);
+                  setDados(novoDado);
+                }}
+                style={styles.delete}
+              />
+            </td>
+          </tr>
+        );
+      })
+    );
+  };
 
   return (
     <App>
@@ -157,11 +196,10 @@ export default function PageComponent() {
         </IngredientePicker>
 
         <IngredientesTable id="listIngredientes">
-          <tr>
-            <th>Ingrediente</th>
-            <th>Quantidade</th>
-            <th>Custo</th>
-          </tr>
+          <thead>
+            <tr>{renderHeader()}</tr>
+          </thead>
+          <tbody>{renderBody()}</tbody>
         </IngredientesTable>
 
         <CustoIndicator>
