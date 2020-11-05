@@ -34,6 +34,16 @@ export const UnidadeIndicator = styled.p`
   color: white;
 `;
 
+export const TableDiv = styled.div`
+  height: 50vh;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
 export const IngredientesTable = styled.table`
   margin-top: 30px;
 
@@ -63,4 +73,8 @@ export const IngredientesTable = styled.table`
 
 export const CustoIndicator = styled.div`
   margin-top: 30px;
+  background: ${colors.secondaryColor};
+  padding: 5px;
+  border-radius: 5px;
+  color: black;
 `;

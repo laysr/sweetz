@@ -1,7 +1,6 @@
-// https://medium.com/@victormenezes35/select-async-reactjs-exemplos-com-api-rest-190db4847f93
 import React from 'react';
 import AsyncSelect from 'react-select/lib/Async';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { FaPlusCircle, FaWindowClose } from 'react-icons/fa';
 import * as colors from '../../config/colors';
 
@@ -9,10 +8,10 @@ import {
   App,
   Main,
   Title,
-  HomeButton,
+  /* HomeButton,
   Botoes,
   CadastrarButton,
-  LoginButton,
+  LoginButton, */
 } from '../../styles/GlobalStyles';
 
 import {
@@ -21,6 +20,7 @@ import {
   IngredientesTable,
   NumberInput,
   SelectContainer,
+  TableDiv,
   UnidadeIndicator,
 } from './styled';
 
@@ -36,6 +36,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    cursor: 'pointer',
   },
 };
 
@@ -79,21 +80,6 @@ export default function PageComponent() {
     return data;
   }
 
-  /* function renderIngredientes(novoDado) {
-    const table = document.getElementById('listIngredientes');
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${novoDado.nome}</td> <td>${novoDado.quantidade}${novoDado.unidade}</td> <td>R$ ${novoDado.custo}</td>`;
-    tr.setAttribute('key', `${novoDado.id}`);
-    tr.setAttribute('id', `ingrediente${novoDado.id}`);
-    table.appendChild(tr);
-    dados.forEach(item => {
-      ul.innerHTML = '';
-      const li = document.createElement('li');
-      li.innerHTML = `${item.nome} - ${item.quantidade}${item.unidade} - R$ ${item.preco}`;
-      return ul.appendChild(li);
-    });
-  } */
-
   function addIngrediente() {
     let custo =
       parseFloat(precoIngrediente) *
@@ -110,17 +96,17 @@ export default function PageComponent() {
     dadosCopy.push(novoDado);
     setDados(dadosCopy);
     dadosIngredientes.push(novoDado);
-    // renderIngredientes(novoDado);
   }
 
   const renderHeader = () => {
     const headerElement = ['Nome', 'Quantidade', 'Custo', 'Ações'];
 
     if (dados.length > 0) {
-      return headerElement.map((key, index) => {
-        return <th key={index}>{key}</th>;
+      return headerElement.map(key => {
+        return <th key={key}>{key}</th>;
       });
     }
+    return '';
   };
 
   const renderBody = () => {
@@ -151,7 +137,7 @@ export default function PageComponent() {
   return (
     <App>
       <Main>
-        <Link to="/">
+        {/* <Link to="/">
           <HomeButton>Home</HomeButton>
         </Link>
         <Botoes>
@@ -161,8 +147,8 @@ export default function PageComponent() {
           <Link to="/login">
             <LoginButton>Login</LoginButton>
           </Link>
-        </Botoes>
-        <Title>Cálculo</Title>
+        </Botoes> */}
+        <Title>Cálculo de Custos</Title>
 
         <IngredientePicker>
           <SelectContainer>
@@ -194,13 +180,14 @@ export default function PageComponent() {
             onClick={addIngrediente}
           />
         </IngredientePicker>
-
-        <IngredientesTable id="listIngredientes">
-          <thead>
-            <tr>{renderHeader()}</tr>
-          </thead>
-          <tbody>{renderBody()}</tbody>
-        </IngredientesTable>
+        <TableDiv>
+          <IngredientesTable id="listIngredientes">
+            <thead>
+              <tr>{renderHeader()}</tr>
+            </thead>
+            <tbody>{renderBody()}</tbody>
+          </IngredientesTable>
+        </TableDiv>
 
         <CustoIndicator>
           Custo Total: R${' '}

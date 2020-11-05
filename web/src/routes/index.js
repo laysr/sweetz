@@ -16,15 +16,15 @@ export default function Routes() {
 
   return (
     <Switch>
-      <MyRoute exact path="/" component={isLoggedIn ? Produtos : Landing} />
-      <MyRoute exact path="/cadastrar" component={Cadastro} />
+      <MyRoute exact path="/" component={Calculo} />
+      {/* <MyRoute exact path="/cadastrar" component={Cadastro} />
       <MyRoute exact path="/login" component={isLoggedIn ? Produtos : Login} />
       <MyRoute
         exact
         path="/calcular"
         component={isLoggedIn ? CalculoLogado : Calculo}
       />
-      <MyRoute exact path="/produtos" component={Produtos} isClosed />
+      <MyRoute exact path="/produtos" component={Produtos} isClosed /> */}
       <MyRoute path="*" component={Page404} />
     </Switch>
   );
