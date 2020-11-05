@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 import MyRoute from './MyRoute';
 /* import Landing from '../pages/Landing';
@@ -12,7 +12,7 @@ import Calculo from '../pages/Calculo';
 import Page404 from '../pages/Page404';
 
 export default function Routes() {
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  // const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   return (
     <Switch>
