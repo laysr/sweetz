@@ -1,9 +1,8 @@
 import React from 'react';
-import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import Main from '~/pages/Main';
-import Calculadora from './pages/Main/Calculadora';
+import Calculadora from '../pages/Main/Calculadora';
 
 const Stack = createStackNavigator();
 
