@@ -9,11 +9,13 @@ import {
   Keyboard,
   PermissionsAndroid,
 } from 'react-native';
-import {Text, Input, Button, Modal, Spinner} from '@ui-kitten/components';
+import {Text, Input, Button, Modal, Spinner, Icon} from '@ui-kitten/components';
 import Geolocation from 'react-native-geolocation-service';
 import {sefaz_token} from '../../../env.js';
 import api from '../../services/api';
 import {generateHash} from '../../utils/hash';
+
+const DeleteIcon = props => <Icon {...props} name="close" />;
 
 export default function Calculadora() {
   const [showModal, setShowModal] = useState(false);
@@ -46,7 +48,6 @@ export default function Calculadora() {
     if (granted) {
       Geolocation.getCurrentPosition(
         async position => {
-          console.log(position);
           const response = await api.post(
             'http://api.sefaz.al.gov.br/sfz_nfce_api/api/public/consultarPrecosPorDescricao',
             {
@@ -98,7 +99,7 @@ export default function Calculadora() {
           style={styles.item}
           onPress={() => {
             const ingr = [...ingredientes];
-            ingr.push(opcao);
+            ingr.push({...opcao, porcentagem: '100'});
             setIngredientes(ingr);
             setShowModal(false);
           }}>
@@ -141,14 +142,27 @@ export default function Calculadora() {
             </Text>
           </TouchableOpacity>
           <Button
+            style={styles.deleteButton}
             key={generateHash()}
+            accessoryLeft={DeleteIcon}
+            status="danger"
             onPress={() => {
               const array = [...ingredientes];
               array.splice(index, 1);
               setIngredientes(array);
-            }}>
-            Apagar
-          </Button>
+            }}
+          />
+          <Input
+            style={styles.ingredienteInput}
+            placeholder="%"
+            keyboardType="numeric"
+            value={ingrediente.porcentagem}
+            onChange={pct => {
+              const ingredientesArray = [...ingredientes];
+              ingredientesArray[index].porcentagem = pct;
+              setIngredientes(ingredientesArray);
+            }}
+          />
         </View>
       );
     });
@@ -250,6 +264,13 @@ const styles = StyleSheet.create({
   },
   ingredienteText: {
     width: 0.7 * Dimensions.get('screen').width,
+  },
+  ingredienteInput: {},
+  deleteButton: {
+    width: 0.1 * Dimensions.get('screen').width,
+    height: 0.03 * Dimensions.get('screen').height,
+    backgroundColor: 'rgb(255, 45, 85)',
+    borderColor: '#000',
   },
   modal: {
     backgroundColor: '#FFF',

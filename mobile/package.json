@@ -12,6 +12,7 @@
   "dependencies": {
     "@eva-design/eva": "^2.0.0",
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/bottom-tabs": "^5.11.8",
     "@react-navigation/native": "^5.9.3",
     "@react-navigation/stack": "^5.14.3",
     "@ui-kitten/components": "^5.0.0",
@@ -26,6 +27,7 @@
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^2.18.1",
     "react-native-svg": "^12.1.0",
+    "react-native-vector-icons": "^8.1.0",
     "react-redux": "^7.2.3",
     "reactotron-react-native": "^5.0.0",
     "reactotron-redux": "^3.1.3",
