@@ -109,7 +109,7 @@ export default function Calculadora() {
           ) : (
             <Text key={generateHash()}>{opcao.nomRazaoSocial}</Text>
           )}
-          <Text key={generateHash()}>{opcao.valUltimaVenda}</Text>
+          <Text key={generateHash()}>R$ {opcao.valUltimaVenda.toFixed(2)}</Text>
         </TouchableOpacity>
       );
     });
@@ -181,6 +181,7 @@ export default function Calculadora() {
             setInputValue(texto);
           }}
         />
+
         <Button
           style={styles.button}
           onPress={async () => {
@@ -240,9 +241,8 @@ const styles = StyleSheet.create({
   },
   input: {
     width: 0.6 * Dimensions.get('screen').width,
-    marginTop: 0.01 * Dimensions.get('screen').height,
-    marginBottom: 0.01 * Dimensions.get('screen').height,
     borderColor: '#000',
+    height: 47,
   },
   text: {
     fontSize: 20,
@@ -256,9 +256,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 0.3 * Dimensions.get('screen').width,
-    height: 0.065 * Dimensions.get('screen').height,
-    marginTop: 0.01 * Dimensions.get('screen').height,
-    marginBottom: 0.01 * Dimensions.get('screen').height,
+    height: 47,
     marginLeft: 0.01 * Dimensions.get('screen').width,
     fontSize: 10,
   },
@@ -282,6 +280,9 @@ const styles = StyleSheet.create({
   },
   item: {
     borderColor: '#000',
+    borderWidth: 1,
+    borderRadius: 6,
     margin: 10,
+    padding: 5,
   },
 });
